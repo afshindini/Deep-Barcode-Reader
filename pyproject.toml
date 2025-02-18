@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "deep_barcode_reader"
-version = "0.1.0"
+version = "0.2.0"
 description = "It can read different types of barcodes"
 authors = ["Afshin Dini <Afshin Dini>"]
 readme = "README.md"
@@ -38,6 +38,10 @@ branch = true
 [tool.poetry.dependencies]
 python = "^3.10"
 click = "^8.1.7"
+asyncio = "^3.4.3"
+numpy = "^2.2.3"
+opencv-python = "^4.11.0.86"
+pyzbar = "^0.1.9"
 
 
 [tool.poetry.group.dev.dependencies]
