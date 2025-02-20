@@ -7,7 +7,6 @@ from pathlib import Path
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 
-import numpy as np
 import cv2
 
 
@@ -32,15 +31,13 @@ class ReaderResults:
     decoded_data: List[str] = field(default_factory=list)
     decoded_types: List[str] = field(default_factory=list)
     bbox_data: List[Any] = field(default_factory=list)
-    to_save: bool = field(default=True)
-    save_path: str = field(default="output")
 
-    def save_image(self, img: Any, file_name: str) -> None:
+    def save_image(self, img: Any, file_name: str = "") -> None:
         """Save the image to the output path for debugging"""
-        if self.to_save:
-            Path(self.save_path).mkdir(parents=True, exist_ok=True)
-            cv2.imwrite(self.save_path + "/" + file_name, img)
-            logger.info("Image is saved to %s", self.save_path + "/" + file_name)
+        if file_name != "":
+            Path(file_name).parent.mkdir(parents=True, exist_ok=True)
+            cv2.imwrite(file_name, img)
+            logger.info("Image is saved to %s", file_name)
 
     async def visualize_results_async(self, file_name: str) -> Optional[Any]:
         """Visualize the results of the barcode/qr code reader"""
@@ -60,9 +57,9 @@ class ReaderResults:
                     thickness=1,
                 )
                 cv2.putText(
-                    np.array(img_bounding_box),
+                    img_bounding_box,
                     str(data),
-                    (int(bbox[0][0] - 10), int(bbox[0][1] - 10)),
+                    (int(bbox[0][0]) - 10, int(bbox[0][1]) - 10),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.5,
                     (0, 0, 255),
