@@ -1,5 +1,6 @@
 """Barcode detector and reader models"""
 
+# pylint: disable=E1101
 import logging
 from typing import Any
 from dataclasses import dataclass, field
@@ -135,3 +136,24 @@ class QRreader(BarcodeBase):
             logger.warning("The barcode/qr code is not detected with QRreader method.")
 
         return result
+
+
+@dataclass
+class Wrapper:
+    """Wrapper class for barcode readers"""
+
+    method: str = field(default="opencv")
+    model_size: str = field(default="l")
+
+    async def method_selection(self, data_path: str, result_path: str) -> Any:
+        """Wrap the method selection for barcode reader"""
+        if self.method == "opencv":
+            barcode: Any = BarcodeOpencv()
+        elif self.method == "zbar":
+            barcode = BarcodeQRZbar()
+        elif self.method == "qrreader":
+            barcode = QRreader(model_size=self.model_size)
+        else:
+            barcode = BarcodeOpencv()
+        detections = await barcode.detect_decode(cv2.imread(data_path))
+        return await detections.visualize_results_async(result_path)
