@@ -44,7 +44,7 @@ logger = logging.getLogger(__name__)
 )
 @click.option(
     "--model_size",
-    type=click.Choice(["n", "n", "m", "l"], case_sensitive=False),
+    type=click.Choice(["n", "s", "m", "l"], case_sensitive=False),
     default="m",
     help="Model size for the barcode reader.",
 )
