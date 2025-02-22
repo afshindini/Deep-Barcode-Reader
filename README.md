@@ -1,5 +1,46 @@
 # Deep-Barcode-Reader
-It can read different types of barcodes
+This repository is used for reading different types of barcodes and QR codes from images.
+The code is written in Python and uses OpenCV, Pyzbar, and other libraries for reading barcodes and QR codes.
+
+
+## How to Use
+The library offers several functions for reading barcodes and QR codes from images.
+General options can be selected before applying the reader method. These options are:
+- `--data_path` is the path to the image file.
+- `--result_path` is the path to the output file.
+- `--verbose` is the verbosity level of the code.
+- `--method` is the method for reading the barcode or QR code.
+- `--model_size` is the size of the deep learning model.
+
+The available methods are as:
+- [Opencv Barcode Reader](#opencv-barcode-reader)
+- [Zbar Barcode Reader](#zbar-barcode-reader)
+- [QR Reader](#qr-reader)
+
+### Opencv Barcode Reader
+This method can only detect barcodes but NOT QR codes. It can detect and decode EAN-8, EAN-13, UPC-A and UPC-E
+barcode types. You can use the method by running the following command:
+```shell
+deep_barcode_reader -vv -d tests/test_data/sample.jpg -m opencv
+```
+This method can only detect specific types of barcodes. However, it is faster than the other methods.
+
+### Zbar Barcode Reader
+This method can detect and decode both barcodes and QR codes.
+It is very powerful to detect and decode different types of barcodes and QR codes.
+You can use the method by running the following command:
+```shell
+deep_barcode_reader -vv -d tests/test_data/sample.jpg -m zbar
+```
+
+### QR Reader
+This method can only detect and decode QR codes.
+Depending on the model size as `n` as nano, `s` as small, `m` as medium, or `l` as large,
+the detection and decoding process time and accuracy can be changed.
+```shell
+deep_barcode_reader -vv -d tests/test_data/sample.jpg -m zbar --model_size l
+```
+
 
 ## How to Develop
 Do the following only once after creating your project:
