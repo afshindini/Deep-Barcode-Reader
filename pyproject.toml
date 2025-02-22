@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "deep_barcode_reader"
-version = "0.1.0"
+version = "0.2.0"
 description = "It can read different types of barcodes"
 authors = ["Afshin Dini <Afshin Dini>"]
 readme = "README.md"
@@ -34,10 +34,28 @@ asyncio_mode="strict"
 omit = ["tests/*"]
 branch = true
 
+[[tool.poetry.source]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu118"
+priority = "explicit"
+
 
 [tool.poetry.dependencies]
 python = "^3.10"
 click = "^8.1.7"
+ultralytics = "8.2.18"
+qreader = "3.12"
+pyzbar = "^0.1.9"
+opencv-python = "^4.9.0.80"
+torch = [
+    { version = "^2.1.2", source = "pytorch", platform = "!=darwin"},
+    { version = "^2.1.2", source = "pypi", platform = "darwin"},
+]
+torchvision = [
+    { version = "^0.16.0", source = "pytorch", platform = "!=darwin"},
+    { version = "^0.16.0", source = "pypi", platform = "darwin"},
+]
+numpy = "1.26.4"
 
 
 [tool.poetry.group.dev.dependencies]

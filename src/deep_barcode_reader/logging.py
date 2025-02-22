@@ -5,7 +5,7 @@ import logging.config
 from typing import Any, Optional
 
 
-def config_logger(loglevel: int, log_file: Optional[str] = None) -> Any:
+def config_logger(loglevel: int) -> Any:
     """Initialize a custom logger"""
     default_logging_config = {
         "version": 1,
