@@ -2,7 +2,7 @@
 
 # pylint: disable=E1101
 import logging
-from typing import Any
+from typing import Any, Tuple
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -145,7 +145,7 @@ class Wrapper:
     method: str = field(default="opencv")
     model_size: str = field(default="l")
 
-    async def method_selection(self, data_path: str, result_path: str) -> Any:
+    async def method_selection(self, image: Any, result_path: str) -> Tuple[Any, Any]:
         """Wrap the method selection for barcode reader"""
         if self.method == "opencv":
             barcode: Any = BarcodeOpencv()
@@ -155,5 +155,6 @@ class Wrapper:
             barcode = QRreader(model_size=self.model_size)
         else:
             barcode = BarcodeOpencv()
-        detections = await barcode.detect_decode(cv2.imread(data_path))
-        return await detections.visualize_results_async(result_path)
+        detections = await barcode.detect_decode(image)
+        result_image = await detections.visualize_results_async(result_path)
+        return detections, result_image
