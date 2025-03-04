@@ -1,3 +1,13 @@
+---
+title: Test
+emoji: 🐠
+colorFrom: gray
+colorTo: red
+sdk: streamlit
+sdk_version: 1.42.2
+app_file: app.py
+pinned: false
+---
 # Deep-Barcode-Reader
 This repository is used for reading different types of barcodes and QR codes from images.
 The code is written in Python and uses OpenCV, Pyzbar, and other libraries for reading barcodes and QR codes.
