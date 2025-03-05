@@ -1,9 +1,11 @@
 """Run the main code for Deep-Barcode-Reader"""
 
+# pylint: disable=E1101
 from pathlib import Path
 import logging
 import asyncio
 import click
+import cv2
 
 
 from deep_barcode_reader import __version__
@@ -64,5 +66,7 @@ def deep_barcode_reader_cli(
 
     reader = Wrapper(model_size=model_size, method=method)
     _ = asyncio.get_event_loop().run_until_complete(
-        reader.method_selection(result_path=result_path, data_path=str(data_path))
+        reader.method_selection(
+            image=cv2.imread(str(data_path)), result_path=result_path
+        )
     )

@@ -1,3 +1,13 @@
+---
+title: Deep Barcode Reader
+emoji: 🐠
+colorFrom: gray
+colorTo: red
+sdk: streamlit
+sdk_version: 1.42.2
+app_file: app.py
+pinned: false
+---
 # Deep-Barcode-Reader
 This repository is used for reading different types of barcodes and QR codes from images.
 The code is written in Python and uses OpenCV, Pyzbar, and other libraries for reading barcodes and QR codes.
@@ -59,3 +69,11 @@ Then create a branch with `git checkout -b BRANCH_NAME` for further developments
 
 ## Docker Container
 Under development.
+
+## Hugging Face Deployment
+The repository is also deployed in [hugging face](https://huggingface.co/spaces/afshin-dini/Deep-Barcode-Reader) in which one can upload images, select the appropriate method and its parameters and detect and decode the barcodes or QR codes.
+It is good to mention that you can also run the application locally by running the following command:
+```shell
+streamlit run app.py
+```
+and then open the browser and go to the address `http://localhost:8501`.

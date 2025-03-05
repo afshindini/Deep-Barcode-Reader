@@ -2,7 +2,7 @@
 
 import logging
 import logging.config
-from typing import Any, Optional
+from typing import Any
 
 
 def config_logger(loglevel: int) -> Any:
@@ -11,9 +11,9 @@ def config_logger(loglevel: int) -> Any:
         "version": 1,
         "disable_existing_loggers": False,
         "formatters": {
-            'standard': {
-                'format': '%(asctime)s - [%(levelname)s] [%(name)s.%(funcName)s:%(lineno)d (%(process)d)] | %(message)s',
-                'datefmt': '%Y-%m-%d %H:%M:%S',
+            "standard": {
+                "format": "%(asctime)s - [%(levelname)s] [%(name)s.%(funcName)s:%(lineno)d (%(process)d)] | %(message)s",
+                "datefmt": "%Y-%m-%d %H:%M:%S",
             },
         },
         "handlers": {
