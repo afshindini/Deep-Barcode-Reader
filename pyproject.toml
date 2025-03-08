@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "deep_barcode_reader"
-version = "0.2.0"
+version = "0.3.0"
 description = "It can read different types of barcodes"
 authors = ["Afshin Dini <Afshin Dini>"]
 readme = "README.md"

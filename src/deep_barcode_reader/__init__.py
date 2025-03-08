@@ -1,6 +1,6 @@
 """ It can read different types of barcodes """
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 from .barcode import Wrapper, QRreader, BarcodeOpencv, BarcodeQRZbar
 from .base import ReaderResults
