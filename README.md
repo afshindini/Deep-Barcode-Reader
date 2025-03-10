@@ -67,8 +67,33 @@ Then create a branch with `git checkout -b BRANCH_NAME` for further developments
 - Then `pre-commit install`.
 - For applying changes use `pre-commit run --all-files`.
 
+
 ## Docker Container
-Under development.
+To run the docker with ssh, do the following first and then based on your need select ,test, development, or production containers:
+```shell
+export DOCKER_BUILDKIT=1
+export DOCKER_SSHAGENT="-v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK -e SSH_AUTH_SOCK"
+```
+### Test Container
+This container is used for testing purposes while it runs the test
+```shell
+docker build --progress plain --ssh default --target test -t barcode_docker:test .
+docker run -it --rm -v "$(pwd):/app" $(echo $DOCKER_SSHAGENT) barcode_docker:test
+```
+
+### Development Container
+This container can be used for development purposes:
+```shell
+docker build --progress plain --ssh default --target development -t barcode_docker:development .
+docker run -it --rm -v "$(pwd):/app" -v /tmp:/tmp $(echo $DOCKER_SSHAGENT) barcode_docker:development
+```
+
+### Production Container
+This container can be used for production purposes:
+```shell
+docker build --progress plain --ssh default --target production -t barcode_docker:production .
+docker run -it --rm -v "$(pwd):/app" -v /tmp:/tmp $(echo $DOCKER_SSHAGENT) barcode_docker:production deep_barcode_reader -vv -d tests/test_data/sample.jpg -m zbar --model_size l
+```
 
 ## Hugging Face Deployment
 The repository is also deployed in [hugging face](https://huggingface.co/spaces/afshin-dini/Deep-Barcode-Reader) in which one can upload images, select the appropriate method and its parameters and detect and decode the barcodes or QR codes.
