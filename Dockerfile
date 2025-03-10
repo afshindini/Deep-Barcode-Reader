@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y \
         openssh-client \
         cargo \
         musl-dev \
+        libzbar0 \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* \
     # github ssh key setting
@@ -84,6 +85,7 @@ RUN --mount=type=ssh apt-get update && apt-get install -y \
         libffi8 \
         libgl1 \
         tini \
+        libzbar0 \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* \
     && chmod a+x /docker-entrypoint.sh \
@@ -104,7 +106,7 @@ COPY . /app
 WORKDIR /app
 # Install dependencies from poetry lock
 RUN --mount=type=ssh source /.venv/bin/activate \
-    && apt-get update && apt-get install -y libgl1 \
+    && apt-get update && apt-get install -y libgl1 libzbar0 \
     && export PIP_FIND_LINKS=http://172.17.0.1:3141/debian/ \
     && export PIP_TRUSTED_HOST=172.17.0.1 \
     && pip3 install nvidia-cublas-cu12 nvidia-cusparse-cu12 triton nvidia-nccl-cu12 nvidia-cudnn-cu12 nvidia-cufft-cu12 nvidia-cusolver-cu12 \
@@ -128,7 +130,7 @@ ENTRYPOINT ["/usr/bin/tini", "--", "docker/entrypoint-test.sh"]
 # Development Container #
 #########################
 FROM development_build as development
-RUN apt-get update && apt-get install -y zsh \
+RUN apt-get update && apt-get install -y zsh libzbar0 \
     && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
     && echo "if [ \"\$NO_WHEELHOUSE\" = \"1\" ]" >>/root/.profile \
     && echo "then" >>/root/.profile \
