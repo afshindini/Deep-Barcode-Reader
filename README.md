@@ -1,6 +1,6 @@
 ---
 title: Deep Barcode Reader
-emoji: 🐠
+emoji: 🔳
 colorFrom: gray
 colorTo: red
 sdk: streamlit
